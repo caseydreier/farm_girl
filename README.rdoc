@@ -1,0 +1,38 @@
+=FarmGirl
+
+Seed your database using your factory definitions.
+
+==Example
+
+Create the directory db/seeds/ in your Rails 2.3 application.  Drop any number of files in there that you'd like to use to seed your database.  For example, if I have a factory defined as "security_levels", then:
+  
+  # db/seeds/security_levels.rb
+  SecurityLevel.delete_all # Remove any old data
+  
+  Factory.create(:security_level, :level => 0, :description => "No Access", :id => 1)
+  Factory.create(:security_level, :level => 1, :description => "Access to modules only", :id => 2)
+  Factory.create(:security_level, :level => 2, :description => "Access to all modules and reports", :id => 3)
+  Factory.create(:security_level, :level => 3, :description => "Access to everything", :id => 4)
+
+Then, in my db/seeds.rb file:
+
+  # db/seeds.rb
+  FarmGirl.seed!
+
+Now, I can execute the built-in Rake task for seeding my db in Rails:
+
+  $ rake db:seed
+
+
+== Installation
+
+  script/plugin install git://github.com/daphonz/farm_girl.git
+
+This plugin needs (of course) FactoryGirl to work.  So far I've used it in Rails 2.3.  Make sure that you properly add the line
+
+  config.gem 'factory_girl', :version => '1.2.4'
+  
+in your main environment.rb file for the dependencies to load correctly.
+
+
+Copyright (c) 2010 Casey Dreier and Singlebrook Technology, released under the MIT license.
